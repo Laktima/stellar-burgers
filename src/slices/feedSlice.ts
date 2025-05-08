@@ -8,7 +8,7 @@ export const fetchFeeds = createAsyncThunk('feeds/getFeeds', async () =>
   getFeedsApi()
 );
 
-export const fetchGetOrders = createAsyncThunk('user/getOrder', async () =>
+export const fetchGetOrders = createAsyncThunk('feeds/getOrder', async () =>
   getOrdersApi()
 );
 
@@ -19,6 +19,11 @@ interface FeedsState {
   total: number;
   totalToday: number;
   userOrders: TOrder[];
+}
+
+interface OrderDetailsPayload {
+  number: number;
+  isUserOrders?: boolean;
 }
 
 const initialState: FeedsState = {
@@ -34,10 +39,10 @@ const feedsSlice = createSlice({
   name: 'feeds',
   initialState,
   reducers: {
-    selectOrderDetails(state, action: PayloadAction<number>) {
-      const selected = state.orders.find(
-        (order) => order.number === action.payload
-      );
+    selectOrderDetails(state, action: PayloadAction<OrderDetailsPayload>) {
+      const { isUserOrders, number } = action.payload;
+      const neededList = isUserOrders ? state.userOrders : state.orders;
+      const selected = neededList.find((order) => order.number === number);
       state.selectedOrder = selected ? selected : null;
     }
   },

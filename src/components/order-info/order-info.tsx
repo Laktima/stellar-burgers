@@ -9,7 +9,7 @@ import {
   fetchFeeds,
   selectOrders
 } from '../../slices/feedSlice';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import {
   selectIngredients,
   fetchIngredients
@@ -18,9 +18,9 @@ import {
 export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
   const { number } = useParams();
-  const selectedOrder = useSelector<TOrder | null>(selectSelectedOrder);
+  const orderData = useSelector<TOrder | null>(selectSelectedOrder);
   const orders = useSelector<TOrder[]>(selectOrders);
-  const orderData = selectedOrder;
+  const location = useLocation();
 
   const ingredients: TIngredient[] = useSelector(selectIngredients);
 
@@ -63,7 +63,7 @@ export const OrderInfo: FC = () => {
       date,
       total
     };
-  }, [orderData, ingredients]);
+  }, [orderData, ingredients, orders.length]);
 
   useEffect(() => {
     dispatch(fetchFeeds());
@@ -71,8 +71,11 @@ export const OrderInfo: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (number) dispatch(selectOrderDetails(Number(number)));
-  }, [number, ingredients, orders]);
+    if (number && orders.length && ingredients.length) {
+      const isUserOrders = location.pathname.includes('/profile');
+      dispatch(selectOrderDetails({ number: Number(number), isUserOrders }));
+    }
+  }, [number, ingredients.length, orders.length]);
 
   if (!orderInfo) {
     return <Preloader />;

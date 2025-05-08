@@ -48,6 +48,9 @@ const basketSlice = createSlice({
       state.ingredients = [];
       state.bun = null;
       state.lastOrder = null;
+    },
+    deleteIngredient(state, action: PayloadAction<number>) {
+      state.ingredients.splice(action.payload, 1);
     }
   },
   selectors: {
@@ -82,6 +85,7 @@ export const {
   addIngredients,
   moveUpIngredient,
   moveDownIngredient,
-  clearOrder
+  clearOrder,
+  deleteIngredient
 } = basketSlice.actions;
 export default basketSlice.reducer;
