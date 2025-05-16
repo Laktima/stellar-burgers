@@ -32,7 +32,10 @@ export const BurgerConstructor: FC = () => {
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
-    if (!getCookie('accessToken')) navigate('/login', { replace: true });
+    if (!getCookie('accessToken')) {
+      navigate('/login', { replace: true });
+      return;
+    }
     dispatch(
       fetchOrderBurgerApi([
         ...ingredients.map((ingredient) => ingredient._id),

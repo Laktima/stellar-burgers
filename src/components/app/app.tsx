@@ -28,6 +28,7 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/ingredients/:id' element={<ConstructorPage />} />
         <Route
           path='/profile'
           element={
