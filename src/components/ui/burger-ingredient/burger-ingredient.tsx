@@ -1,6 +1,8 @@
 import React, { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './burger-ingredient.module.css';
+import { useDispatch } from '../../../services/store';
+import { selectIngredientDetails } from '../../../slices/ingredientsSilce';
 
 import {
   Counter,
@@ -13,6 +15,7 @@ import { TBurgerIngredientUIProps } from './type';
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, count, handleAdd, locationState }) => {
     const { image, price, name, _id } = ingredient;
+    const dispatch = useDispatch();
 
     return (
       <li className={styles.container}>
@@ -20,6 +23,7 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
           className={styles.article}
           to={`/ingredients/${_id}`}
           state={locationState}
+          onClick={() => dispatch(selectIngredientDetails(_id))}
         >
           {count && <Counter count={count} />}
           <img className={styles.img} src={image} alt='картинка ингредиента.' />
