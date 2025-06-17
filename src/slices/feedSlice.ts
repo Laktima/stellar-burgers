@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getFeedsApi, getOrdersApi } from '@api';
+import { getFeedsApi, getOrdersApi } from '../utils/burger-api';
 import { TOrder } from '@utils-types';
 
 export const fetchFeeds = createAsyncThunk('feeds/getFeeds', async () =>

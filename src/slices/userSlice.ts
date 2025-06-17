@@ -11,7 +11,7 @@ import {
   forgotPasswordApi,
   updateUserApi,
   getOrdersApi
-} from '@api';
+} from '../utils/burger-api';
 import { TOrder, TUser } from '@utils-types';
 import { setCookie, deleteCookie } from '../utils/cookie';
 
