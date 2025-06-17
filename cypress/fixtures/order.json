@@ -1,0 +1,15 @@
+{
+    "order": {
+        "_id": "1",
+        "status": "created",
+        "name": "order 1",
+        "createdAt": "2024-12-12",
+        "updatedAt": "2024-12-12",
+        "number": "0001",
+        "ingredients": [
+            "Краторная булка N-200i", "Филе Люминесцентного тетраодонтимформа", "Соус Spicy-X"
+        ]
+    },
+    "name": "name",
+    "success": true
+}

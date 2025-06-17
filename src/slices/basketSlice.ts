@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { orderBurgerApi } from '@api';
+import { orderBurgerApi } from '../utils/burger-api';
 import { TIngredient, TOrder } from '@utils-types';
 
 export const fetchOrderBurgerApi = createAsyncThunk(
@@ -48,6 +48,7 @@ const basketSlice = createSlice({
       state.ingredients = [];
       state.bun = null;
       state.lastOrder = null;
+      state.isLoading = false;
     },
     deleteIngredient(state, action: PayloadAction<number>) {
       state.ingredients.splice(action.payload, 1);
